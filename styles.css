@@ -1,0 +1,181 @@
+@import url('https://fonts.googleapis.com/css2?family=Medrano&display=swap');
+
+:root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 240 5.9% 10%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 240 5.9% 10%;
+    --radius: 0.5rem;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Medrano', sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: linear-gradient(to right, purple, blue);
+    padding: 1rem;
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: 800;
+    color: white;
+    margin-bottom: 1.5rem;
+    animation: bounce 2s infinite;
+    text-align: center;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+.game-setup, .game-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 24rem;
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid white;
+    border-radius: var(--radius);
+    background: transparent;
+    color: white;
+    font-size: 1rem;
+    font-family: 'Medrano', sans-serif;
+}
+
+.form-control option {
+    background-color: purple;
+    color: white;
+}
+
+.category, .question, .answers {
+    font-size: 1.125rem;
+    color: white;
+    margin-bottom: 1rem;
+    text-align: center;
+    max-width: 100%;
+}
+
+.answers {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+}
+
+.answers label {
+    display: block;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.answers label:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.answers input[type="radio"] {
+    margin-right: 0.5rem;
+}
+
+.button {
+    background-color: yellow;
+    color: black;
+    padding: 0.75rem;
+    border-radius: var(--radius);
+    width: 100%;
+    max-width: 24rem;
+    transition: transform 0.2s, background-color 0.3s;
+    font-size: 1rem;
+    cursor: pointer;
+    border: none;
+    margin-top: 1rem;
+    font-family: 'Medrano', sans-serif;
+}
+
+.button:hover {
+    background-color: lightyellow;
+    transform: scale(1.05);
+}
+
+.score-board, .message {
+    font-size: 1.125rem;
+    color: white;
+    margin-top: 1rem;
+    text-align: center;
+}
+
+/* Mobile-friendly adjustments */
+@media (max-width: 768px) {
+    body {
+        font-size: 14px;
+    }
+
+    .container {
+        padding: 0.5rem;
+    }
+
+    .title {
+        font-size: 1.5rem;
+    }
+
+    .game-setup, .game-area {
+        max-width: 100%;
+    }
+
+    .form-control, .button {
+        font-size: 1rem;
+        padding: 0.5rem;
+    }
+
+    .category, .question, .answers {
+        font-size: 1rem;
+    }
+
+    .answers label {
+        padding: 0.75rem 0.5rem;
+    }
+}
