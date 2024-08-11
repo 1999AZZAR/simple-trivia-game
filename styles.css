@@ -100,6 +100,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: stretch;
+    text-align: left;
     width: 100%;
 }
 
@@ -177,6 +178,24 @@ body {
     100% {
         transform: rotate(360deg);
     }
+}
+
+.footer {
+    margin-top: 3.5rem;
+    color: #333;
+    text-align: center;
+    font-size: 1.2rem; /* Increase font size for better readability */
+}
+
+.footer a {
+    color: #ededed;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer a:hover {
+    color: #ffffff;
+    transform: scale(1.05);
 }
 
 /* Mobile-friendly adjustments */

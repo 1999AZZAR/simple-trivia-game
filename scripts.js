@@ -108,6 +108,7 @@ function startGame() {
     selectedCategory = document.getElementById('trivia-category').value;
     selectedType = document.getElementById('trivia-type').value;
     document.getElementById('game-setup').style.display = 'none';
+    document.getElementById('footer').style.display = 'none';
     document.getElementById('game-area').style.display = 'block';
     score = 5; // Reset score when starting a new game
     document.getElementById('score').textContent = score;
@@ -265,6 +266,7 @@ function resetGame() {
     document.getElementById('submitBtn').disabled = false;
     document.getElementById('game-area').style.display = 'none';
     document.getElementById('game-setup').style.display = 'block';
+    document.getElementById('footer').style.display = 'block';
     questionCache = [];
     currentQuestionIndex = 0;
     isFetching = false;
