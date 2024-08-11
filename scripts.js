@@ -127,12 +127,15 @@ function startGame() {
 
 async function fetchQuestions() {
     isFetching = true;
-    let apiUrl = `https://opentdb.com/api.php?amount=25&type=multiple`;
+    let apiUrl = `https://opentdb.com/api.php?amount=25`;
     if (selectedCategory !== 'any') {
         apiUrl += `&category=${selectedCategory}`;
     }
     if (selectedDifficulty !== 'any') {
         apiUrl += `&difficulty=${selectedDifficulty}`;
+    }
+    if (selectedType !== 'any') {
+        apiUrl += `&type=${selectedType}`;
     }
 
     try {
