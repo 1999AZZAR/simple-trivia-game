@@ -21,6 +21,13 @@
     --input: 240 5.9% 90%;
     --ring: 240 5.9% 10%;
     --radius: 0.5rem;
+.form-label {
+    font-size: 1rem;
+    color: white;
+    margin-bottom: 0.5rem;
+    text-align: left;
+    width: 100%;
+    max-width: 24rem;
 }
 
 .winning-effect {

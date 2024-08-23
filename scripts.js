@@ -17,6 +17,10 @@ const translations = {
         score: 'Score',
         category: 'Category',
         correct: "🎉 Correct! You've gained a point.",
+        language: 'Language',
+        category: 'Category',
+        difficulty: 'Difficulty',
+        type: 'Type',
         wrong: '😢 Wrong answer! The correct answer was "{answer}".',
         selectAnswer: "Please select an answer.",
         congrats: "🏆 Congratulations! You've won the game! You have answered a total of {count} questions.",
@@ -29,6 +33,10 @@ const translations = {
         score: 'Skor',
         category: 'Kategori',
         correct: '🎉 Benar! Anda mendapat satu poin.',
+        language: 'Bahasa',
+        category: 'Kategori',
+        difficulty: 'Kesulitan',
+        type: 'Tipe',
         wrong: '😢 Jawaban salah! Jawaban yang benar adalah "{answer}".',
         selectAnswer: 'Silakan pilih jawaban.',
         congrats: '🏆 Selamat! Anda telah memenangkan permainan! Anda telah menjawab total {count} pertanyaan.',
@@ -41,6 +49,10 @@ const translations = {
         score: 'Puntuación',
         category: 'Categoría',
         correct: "🎉 ¡Correcto! Has ganado un punto.",
+        language: 'Idioma',
+        category: 'Categoría',
+        difficulty: 'Dificultad',
+        type: 'Tipo',
         wrong: '😢 Respuesta incorrecta. La respuesta correcta era "{answer}".',
         selectAnswer: "Por favor, selecciona una respuesta.",
         congrats: "🏆 ¡Felicidades! ¡Has ganado el juego! Has respondido un total de {count} preguntas.",
@@ -53,6 +65,10 @@ const translations = {
         score: 'Score',
         category: 'Catégorie',
         correct: "🎉 Correct! Vous avez gagné un point.",
+        language: 'Langue',
+        category: 'Catégorie',
+        difficulty: 'Difficulté',
+        type: 'Type',
         wrong: '😢 Mauvaise réponse! La bonne réponse était "{answer}".',
         selectAnswer: "Veuillez sélectionner une réponse.",
         congrats: "🏆 Félicitations! Vous avez gagné le jeu! Vous avez répondu à un total de {count} questions.",
@@ -65,6 +81,10 @@ const translations = {
         score: 'Punktzahl',
         category: 'Kategorie',
         correct: "🎉 Richtig! Sie haben einen Punkt gewonnen.",
+        language: 'Sprache',
+        category: 'Kategorie',
+        difficulty: 'Schwierigkeit',
+        type: 'Typ',
         wrong: '😢 Falsche Antwort! Die richtige Antwort war "{answer}".',
         selectAnswer: "Bitte wählen Sie eine Antwort.",
         congrats: "🏆 Glückwunsch! Sie haben das Spiel gewonnen! Sie haben insgesamt {count} Fragen beantwortet.",
@@ -77,6 +97,10 @@ const translations = {
         score: 'スコア',
         category: 'カテゴリー',
         correct: "🎉 正解です！ポイントを獲得しました。",
+        language: '言語',
+        category: 'カテゴリー',
+        difficulty: '難易度',
+        type: 'タイプ',
         wrong: '😢 間違った答え！正解は "{answer}" でした。',
         selectAnswer: "回答を選択してください。",
         congrats: "🏆 おめでとうございます！ゲームに勝ちました！合計 {count} 問答えました。",
@@ -100,7 +124,10 @@ document.addEventListener('DOMContentLoaded', () => {
 function changeLanguage() {
     selectedLanguage = document.getElementById('trivia-language').value;
     updateInterface();
-}
+    document.getElementById('label-language').textContent = translations[selectedLanguage].language;
+    document.getElementById('label-category').textContent = translations[selectedLanguage].category;
+    document.getElementById('label-difficulty').textContent = translations[selectedLanguage].difficulty;
+    document.getElementById('label-type').textContent = translations[selectedLanguage].type;
 
 function updateInterface() {
     document.getElementById('start-game').textContent = translations[selectedLanguage].startGame;
