@@ -32,6 +32,8 @@
         transform: scale(1);
         color: gold;
     }
+}
+}
     50% {
         transform: scale(1.2);
         color: yellow;
