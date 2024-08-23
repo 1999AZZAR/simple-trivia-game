@@ -19,7 +19,7 @@ const translations = {
         correct: "🎉 Correct! You've gained a point.",
         wrong: '😢 Wrong answer! The correct answer was "{answer}".',
         selectAnswer: "Please select an answer.",
-        congrats: "🏆 Congratulations! You've won the game! You answered {count} questions.",
+        congrats: "🏆 Congratulations! You've won the game! You have answered a total of {count} questions.",
         gameOver: "Game Over! Your score reached zero. You answered {count} questions.",
         errorFetching: "Error fetching questions. Please try again."
     },
@@ -31,7 +31,7 @@ const translations = {
         correct: '🎉 Benar! Anda mendapat satu poin.',
         wrong: '😢 Jawaban salah! Jawaban yang benar adalah "{answer}".',
         selectAnswer: 'Silakan pilih jawaban.',
-        congrats: '🏆 Selamat! Anda telah memenangkan permainan! Anda menjawab {count} pertanyaan.',
+        congrats: '🏆 Selamat! Anda telah memenangkan permainan! Anda telah menjawab total {count} pertanyaan.',
         gameOver: 'Permainan Berakhir! Skor Anda mencapai nol. Anda menjawab {count} pertanyaan.',
         errorFetching: 'Kesalahan saat mengambil pertanyaan. Silakan coba lagi.'
     },
@@ -43,7 +43,7 @@ const translations = {
         correct: "🎉 ¡Correcto! Has ganado un punto.",
         wrong: '😢 Respuesta incorrecta. La respuesta correcta era "{answer}".',
         selectAnswer: "Por favor, selecciona una respuesta.",
-        congrats: "🏆 ¡Felicidades! ¡Has ganado el juego! Respondiste {count} preguntas.",
+        congrats: "🏆 ¡Felicidades! ¡Has ganado el juego! Has respondido un total de {count} preguntas.",
         gameOver: "Juego terminado. Tu puntuación llegó a cero. Respondiste {count} preguntas.",
         errorFetching: "Error al obtener preguntas. Por favor, inténtalo de nuevo."
     },
@@ -55,7 +55,7 @@ const translations = {
         correct: "🎉 Correct! Vous avez gagné un point.",
         wrong: '😢 Mauvaise réponse! La bonne réponse était "{answer}".',
         selectAnswer: "Veuillez sélectionner une réponse.",
-        congrats: "🏆 Félicitations! Vous avez gagné le jeu! Vous avez répondu à {count} questions.",
+        congrats: "🏆 Félicitations! Vous avez gagné le jeu! Vous avez répondu à un total de {count} questions.",
         gameOver: "Jeu terminé! Votre score a atteint zéro. Vous avez répondu à {count} questions.",
         errorFetching: "Erreur lors de la récupération des questions. Veuillez réessayer."
     },
@@ -67,7 +67,7 @@ const translations = {
         correct: "🎉 Richtig! Sie haben einen Punkt gewonnen.",
         wrong: '😢 Falsche Antwort! Die richtige Antwort war "{answer}".',
         selectAnswer: "Bitte wählen Sie eine Antwort.",
-        congrats: "🏆 Glückwunsch! Sie haben das Spiel gewonnen! Sie haben {count} Fragen beantwortet.",
+        congrats: "🏆 Glückwunsch! Sie haben das Spiel gewonnen! Sie haben insgesamt {count} Fragen beantwortet.",
         gameOver: "Spiel beendet! Ihre Punktzahl erreichte null. Sie haben {count} Fragen beantwortet.",
         errorFetching: "Fehler beim Abrufen der Fragen. Bitte versuchen Sie es erneut."
     },
@@ -79,7 +79,7 @@ const translations = {
         correct: "🎉 正解です！ポイントを獲得しました。",
         wrong: '😢 間違った答え！正解は "{answer}" でした。',
         selectAnswer: "回答を選択してください。",
-        congrats: "🏆 おめでとうございます！ゲームに勝ちました！{count} 問答えました。",
+        congrats: "🏆 おめでとうございます！ゲームに勝ちました！合計 {count} 問答えました。",
         gameOver: "ゲームオーバー！スコアがゼロになりました。{count} 問答えました。",
         errorFetching: "質問の取得中にエラーが発生しました。もう一度お試しください。"
     }
