@@ -209,7 +209,7 @@ function submitAnswer() {
         document.getElementById('score').textContent = score;
 
         if (score >= winningScore) {
-            messageElement.textContent = translations[selectedLanguage].congrats;
+            messageElement.textContent = `${translations[selectedLanguage].congrats} You answered ${questionCount} questions.`;
             document.getElementById('message').classList.add('winning-effect');
             setTimeout(() => {
                 alert(`${translations[selectedLanguage].congrats} You answered ${questionCount} questions.`);
@@ -273,7 +273,7 @@ function displayNextQuestion() {
 
 function gameOver() {
     const messageElement = document.getElementById('message');
-    messageElement.textContent = translations[selectedLanguage].gameOver;
+    messageElement.textContent = `${translations[selectedLanguage].gameOver} You answered ${questionCount} questions.`;
     document.getElementById('submitBtn').disabled = true;
     alert(`${translations[selectedLanguage].gameOver} You answered ${questionCount} questions.`);
     setTimeout(() => {
