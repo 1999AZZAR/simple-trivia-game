@@ -153,7 +153,24 @@ body {
     font-family: 'Medrano', sans-serif;
 }
 
-.button:hover, #cancelBtn:hover {
+#cancelBtn {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: transparent;
+    color: white;
+    font-size: 1.5rem;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s, color 0.3s;
+}
+
+#cancelBtn:hover {
+    color: lightyellow;
+    transform: scale(1.2);
+}
+
+.button:hover {
     background-color: lightyellow;
     transform: scale(1.05);
 }

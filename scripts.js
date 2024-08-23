@@ -114,7 +114,7 @@ function startGame() {
     const cancelButton = document.createElement('button');
     cancelButton.id = 'cancelBtn';
     cancelButton.className = 'button';
-    cancelButton.textContent = 'Cancel';
+    cancelButton.textContent = 'X';
     document.getElementById('game-area').appendChild(cancelButton);
     score = 5; // Reset score when starting a new game
     document.getElementById('score').textContent = score;
