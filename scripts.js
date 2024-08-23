@@ -87,7 +87,11 @@ const translations = {
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('start-game').addEventListener('click', startGame);
     document.getElementById('submitBtn').addEventListener('click', submitAnswer);
-    document.getElementById('cancelBtn').addEventListener('click', resetGame);
+    document.getElementById('game-area').addEventListener('click', (event) => {
+        if (event.target && event.target.id === 'cancelBtn') {
+            resetGame();
+        }
+    });
     document.getElementById('trivia-language').addEventListener('change', changeLanguage);
     updateInterface();
 });
