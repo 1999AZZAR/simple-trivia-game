@@ -197,9 +197,11 @@ function submitAnswer() {
 
         if (score >= winningScore) {
             messageElement.textContent = translations[selectedLanguage].congrats;
+            document.getElementById('message').classList.add('winning-effect');
             setTimeout(() => {
+                document.getElementById('message').classList.remove('winning-effect');
                 resetGame();
-            }, 2000);
+            }, 3000);
         } else if (score <= 0) {
             gameOver();
         } else {

@@ -23,6 +23,21 @@
     --radius: 0.5rem;
 }
 
+.winning-effect {
+    animation: winning-animation 3s ease-in-out;
+}
+
+@keyframes winning-animation {
+    0%, 100% {
+        transform: scale(1);
+        color: gold;
+    }
+    50% {
+        transform: scale(1.2);
+        color: yellow;
+    }
+}
+
 * {
     box-sizing: border-box;
 }
