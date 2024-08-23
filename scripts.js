@@ -119,6 +119,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     document.getElementById('trivia-language').addEventListener('change', changeLanguage);
     updateInterface();
+    document.getElementById('label-language').textContent = translations[selectedLanguage].language;
+    document.getElementById('label-category').textContent = translations[selectedLanguage].category;
+    document.getElementById('label-difficulty').textContent = translations[selectedLanguage].difficulty;
+    document.getElementById('label-type').textContent = translations[selectedLanguage].type;
 });
 
 function changeLanguage() {
