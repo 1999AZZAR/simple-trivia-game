@@ -153,7 +153,7 @@ body {
     font-family: 'Medrano', sans-serif;
 }
 
-.button:hover {
+.button:hover, #cancelBtn:hover {
     background-color: lightyellow;
     transform: scale(1.05);
 }

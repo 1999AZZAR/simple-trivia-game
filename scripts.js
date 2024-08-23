@@ -87,6 +87,7 @@ const translations = {
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('start-game').addEventListener('click', startGame);
     document.getElementById('submitBtn').addEventListener('click', submitAnswer);
+    document.getElementById('cancelBtn').addEventListener('click', resetGame);
     document.getElementById('trivia-language').addEventListener('change', changeLanguage);
     updateInterface();
 });
@@ -110,6 +111,11 @@ function startGame() {
     document.getElementById('game-setup').style.display = 'none';
     document.getElementById('footer').style.display = 'none';
     document.getElementById('game-area').style.display = 'block';
+    const cancelButton = document.createElement('button');
+    cancelButton.id = 'cancelBtn';
+    cancelButton.className = 'button';
+    cancelButton.textContent = 'Cancel';
+    document.getElementById('game-area').appendChild(cancelButton);
     score = 5; // Reset score when starting a new game
     document.getElementById('score').textContent = score;
     questionCache = [];
