@@ -128,6 +128,7 @@ function changeLanguage() {
     document.getElementById('label-category').textContent = translations[selectedLanguage].category;
     document.getElementById('label-difficulty').textContent = translations[selectedLanguage].difficulty;
     document.getElementById('label-type').textContent = translations[selectedLanguage].type;
+}
 
 function updateInterface() {
     document.getElementById('start-game').textContent = translations[selectedLanguage].startGame;
