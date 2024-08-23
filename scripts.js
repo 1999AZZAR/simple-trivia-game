@@ -19,8 +19,8 @@ const translations = {
         correct: "🎉 Correct! You've gained a point.",
         wrong: '😢 Wrong answer! The correct answer was "{answer}".',
         selectAnswer: "Please select an answer.",
-        congrats: "🏆 Congratulations! You've won the game!",
-        gameOver: "Game Over! Your score reached zero.",
+        congrats: "🏆 Congratulations! You've won the game! You answered {count} questions.",
+        gameOver: "Game Over! Your score reached zero. You answered {count} questions.",
         errorFetching: "Error fetching questions. Please try again."
     },
     id: {
@@ -31,8 +31,8 @@ const translations = {
         correct: '🎉 Benar! Anda mendapat satu poin.',
         wrong: '😢 Jawaban salah! Jawaban yang benar adalah "{answer}".',
         selectAnswer: 'Silakan pilih jawaban.',
-        congrats: '🏆 Selamat! Anda telah memenangkan permainan!',
-        gameOver: 'Permainan Berakhir! Skor Anda mencapai nol.',
+        congrats: '🏆 Selamat! Anda telah memenangkan permainan! Anda menjawab {count} pertanyaan.',
+        gameOver: 'Permainan Berakhir! Skor Anda mencapai nol. Anda menjawab {count} pertanyaan.',
         errorFetching: 'Kesalahan saat mengambil pertanyaan. Silakan coba lagi.'
     },
     es: {
@@ -43,8 +43,8 @@ const translations = {
         correct: "🎉 ¡Correcto! Has ganado un punto.",
         wrong: '😢 Respuesta incorrecta. La respuesta correcta era "{answer}".',
         selectAnswer: "Por favor, selecciona una respuesta.",
-        congrats: "🏆 ¡Felicidades! ¡Has ganado el juego!",
-        gameOver: "Juego terminado. Tu puntuación llegó a cero.",
+        congrats: "🏆 ¡Felicidades! ¡Has ganado el juego! Respondiste {count} preguntas.",
+        gameOver: "Juego terminado. Tu puntuación llegó a cero. Respondiste {count} preguntas.",
         errorFetching: "Error al obtener preguntas. Por favor, inténtalo de nuevo."
     },
     fr: {
@@ -55,8 +55,8 @@ const translations = {
         correct: "🎉 Correct! Vous avez gagné un point.",
         wrong: '😢 Mauvaise réponse! La bonne réponse était "{answer}".',
         selectAnswer: "Veuillez sélectionner une réponse.",
-        congrats: "🏆 Félicitations! Vous avez gagné le jeu!",
-        gameOver: "Jeu terminé! Votre score a atteint zéro.",
+        congrats: "🏆 Félicitations! Vous avez gagné le jeu! Vous avez répondu à {count} questions.",
+        gameOver: "Jeu terminé! Votre score a atteint zéro. Vous avez répondu à {count} questions.",
         errorFetching: "Erreur lors de la récupération des questions. Veuillez réessayer."
     },
     de: {
@@ -67,8 +67,8 @@ const translations = {
         correct: "🎉 Richtig! Sie haben einen Punkt gewonnen.",
         wrong: '😢 Falsche Antwort! Die richtige Antwort war "{answer}".',
         selectAnswer: "Bitte wählen Sie eine Antwort.",
-        congrats: "🏆 Glückwunsch! Sie haben das Spiel gewonnen!",
-        gameOver: "Spiel beendet! Ihre Punktzahl erreichte null.",
+        congrats: "🏆 Glückwunsch! Sie haben das Spiel gewonnen! Sie haben {count} Fragen beantwortet.",
+        gameOver: "Spiel beendet! Ihre Punktzahl erreichte null. Sie haben {count} Fragen beantwortet.",
         errorFetching: "Fehler beim Abrufen der Fragen. Bitte versuchen Sie es erneut."
     },
     ja: {
@@ -79,8 +79,8 @@ const translations = {
         correct: "🎉 正解です！ポイントを獲得しました。",
         wrong: '😢 間違った答え！正解は "{answer}" でした。',
         selectAnswer: "回答を選択してください。",
-        congrats: "🏆 おめでとうございます！ゲームに勝ちました！",
-        gameOver: "ゲームオーバー！スコアがゼロになりました。",
+        congrats: "🏆 おめでとうございます！ゲームに勝ちました！{count} 問答えました。",
+        gameOver: "ゲームオーバー！スコアがゼロになりました。{count} 問答えました。",
         errorFetching: "質問の取得中にエラーが発生しました。もう一度お試しください。"
     }
 };
@@ -209,7 +209,7 @@ function submitAnswer() {
         document.getElementById('score').textContent = score;
 
         if (score >= winningScore) {
-            messageElement.textContent = `${translations[selectedLanguage].congrats} You answered ${questionCount} questions.`;
+            messageElement.textContent = translations[selectedLanguage].congrats.replace('{count}', questionCount);
             document.getElementById('message').classList.add('winning-effect');
             setTimeout(() => {
                 document.getElementById('message').classList.remove('winning-effect');
@@ -272,7 +272,7 @@ function displayNextQuestion() {
 
 function gameOver() {
     const messageElement = document.getElementById('message');
-    messageElement.textContent = `${translations[selectedLanguage].gameOver} You answered ${questionCount} questions.`;
+    messageElement.textContent = translations[selectedLanguage].gameOver.replace('{count}', questionCount);
     document.getElementById('submitBtn').disabled = true;
     setTimeout(() => {
         resetGame();
