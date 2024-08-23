@@ -241,31 +241,34 @@ body {
 /* Mobile-friendly adjustments */
 @media (max-width: 768px) {
     body {
-        font-size: 14px;
-    }
-
-    .container {
+        font-size: 16px;
         padding: 0.5rem;
     }
 
+    .container {
+        padding: 1rem;
+    }
+
     .title {
-        font-size: 1.5rem;
+        font-size: 1.75rem;
+        margin-bottom: 1rem;
     }
 
     .game-setup, .game-area {
         max-width: 100%;
+        padding: 0 1rem;
     }
 
     .form-control, .button {
-        font-size: 1rem;
-        padding: 0.5rem;
+        font-size: 1.125rem;
+        padding: 0.75rem;
     }
 
     .category, .question, .answers {
-        font-size: 1rem;
+        font-size: 1.125rem;
     }
 
     .answers label {
-        padding: 0.75rem 0.5rem;
+        padding: 1rem 0.75rem;
     }
 }
