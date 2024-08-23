@@ -8,6 +8,7 @@ let selectedType = 'any';
 let questionCache = [];
 let currentQuestionIndex = 0;
 let isFetching = false;
+let questionCount = 0; // Initialize question count
 
 const translations = {
     en: {
@@ -123,6 +124,7 @@ function startGame() {
     score = 5; // Reset score when starting a new game
     document.getElementById('score').textContent = score;
     questionCache = [];
+    questionCount = 0; // Reset question count when starting a new game
     currentQuestionIndex = 0;
 
     // Show loading animation
@@ -196,6 +198,7 @@ function submitAnswer() {
     const messageElement = document.getElementById('message');
     if (selectedAnswer) {
         const userAnswer = selectedAnswer.value;
+        questionCount++; // Increment question count
         if (userAnswer === correctAnswer) {
             score++;
             messageElement.textContent = translations[selectedLanguage].correct;
@@ -209,6 +212,7 @@ function submitAnswer() {
             messageElement.textContent = translations[selectedLanguage].congrats;
             document.getElementById('message').classList.add('winning-effect');
             setTimeout(() => {
+                alert(`${translations[selectedLanguage].congrats} You answered ${questionCount} questions.`);
                 document.getElementById('message').classList.remove('winning-effect');
                 resetGame();
             }, 3000);
@@ -271,6 +275,7 @@ function gameOver() {
     const messageElement = document.getElementById('message');
     messageElement.textContent = translations[selectedLanguage].gameOver;
     document.getElementById('submitBtn').disabled = true;
+    alert(`${translations[selectedLanguage].gameOver} You answered ${questionCount} questions.`);
     setTimeout(() => {
         resetGame();
     }, 2000);
