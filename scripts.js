@@ -212,7 +212,6 @@ function submitAnswer() {
             messageElement.textContent = `${translations[selectedLanguage].congrats} You answered ${questionCount} questions.`;
             document.getElementById('message').classList.add('winning-effect');
             setTimeout(() => {
-                alert(`${translations[selectedLanguage].congrats} You answered ${questionCount} questions.`);
                 document.getElementById('message').classList.remove('winning-effect');
                 resetGame();
             }, 3000);
@@ -275,7 +274,6 @@ function gameOver() {
     const messageElement = document.getElementById('message');
     messageElement.textContent = `${translations[selectedLanguage].gameOver} You answered ${questionCount} questions.`;
     document.getElementById('submitBtn').disabled = true;
-    alert(`${translations[selectedLanguage].gameOver} You answered ${questionCount} questions.`);
     setTimeout(() => {
         resetGame();
     }, 2000);
