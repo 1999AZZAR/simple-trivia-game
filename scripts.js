@@ -1,14 +1,14 @@
 let correctAnswer = '';
-let score = 5; // Base score
+let score = 5;
 const winningScore = 10;
-let selectedLanguage = 'en'; // Default language
+let selectedLanguage = 'en';
 let selectedDifficulty = 'any';
 let selectedCategory = 'any';
 let selectedType = 'any';
 let questionCache = [];
 let currentQuestionIndex = 0;
 let isFetching = false;
-let questionCount = 0; // Initialize question count
+let questionCount = 0;
 
 const translations = {
     en: {
@@ -24,7 +24,8 @@ const translations = {
         selectAnswer: "Please select an answer.",
         congrats: "🏆 Congratulations! You've won the game! You have answered a total of {count} questions.",
         gameOver: "Game Over! Your score reached zero. You have answered a total of {count} questions.",
-        errorFetching: "Error fetching questions. Please try again."
+        errorFetching: "Error fetching questions. Please try again.",
+        loading: 'Loading...'
     },
     id: {
         startGame: 'Mulai Permainan',
@@ -39,7 +40,8 @@ const translations = {
         selectAnswer: 'Silakan pilih jawaban.',
         congrats: '🏆 Selamat! Anda telah memenangkan permainan! Anda telah menjawab total {count} pertanyaan.',
         gameOver: 'Permainan Berakhir! Skor Anda mencapai nol. Anda telah menjawab total {count} pertanyaan.',
-        errorFetching: 'Kesalahan saat mengambil pertanyaan. Silakan coba lagi.'
+        errorFetching: 'Kesalahan saat mengambil pertanyaan. Silakan coba lagi.',
+        loading: 'Sedang memuat...'
     },
     es: {
         startGame: 'Iniciar Juego',
@@ -54,7 +56,8 @@ const translations = {
         selectAnswer: "Por favor, selecciona una respuesta.",
         congrats: "🏆 ¡Felicidades! ¡Has ganado el juego! Has respondido un total de {count} preguntas.",
         gameOver: "Juego terminado. Tu puntuación llegó a cero. Has respondido un total de {count} preguntas.",
-        errorFetching: "Error al obtener preguntas. Por favor, inténtalo de nuevo."
+        errorFetching: "Error al obtener preguntas. Por favor, inténtalo de nuevo.",
+        loading: 'Cargando...'
     },
     fr: {
         startGame: 'Démarrer le jeu',
@@ -69,7 +72,8 @@ const translations = {
         selectAnswer: "Veuillez sélectionner une réponse.",
         congrats: "🏆 Félicitations! Vous avez gagné le jeu! Vous avez répondu à un total de {count} questions.",
         gameOver: "Jeu terminé! Votre score a atteint zéro. Vous avez répondu à un total de {count} questions.",
-        errorFetching: "Erreur lors de la récupération des questions. Veuillez réessayer."
+        errorFetching: "Erreur lors de la récupération des questions. Veuillez réessayer.",
+        loading: 'Chargement...'
     },
     de: {
         startGame: 'Spiel starten',
@@ -84,7 +88,8 @@ const translations = {
         selectAnswer: "Bitte wählen Sie eine Antwort.",
         congrats: "🏆 Glückwunsch! Sie haben das Spiel gewonnen! Sie haben insgesamt {count} Fragen beantwortet.",
         gameOver: "Spiel beendet! Ihre Punktzahl erreichte null. Sie haben insgesamt {count} Fragen beantwortet.",
-        errorFetching: "Fehler beim Abrufen der Fragen. Bitte versuchen Sie es erneut."
+        errorFetching: "Fehler beim Abrufen der Fragen. Bitte versuchen Sie es erneut.",
+        loading: 'Laden...'
     },
     ja: {
         startGame: 'ゲーム開始',
@@ -99,7 +104,8 @@ const translations = {
         selectAnswer: "回答を選択してください。",
         congrats: "🏆 おめでとうございます！ゲームに勝ちました！合計 {count} 問答えました。",
         gameOver: "ゲームオーバー！スコアがゼロになりました。合計 {count} 問答えました。",
-        errorFetching: "質問の取得中にエラーが発生しました。もう一度お試しください。"
+        errorFetching: "質問の取得中にエラーが発生しました。もう一度お試しください。",
+        loading: '読み込み中...'
     }
 };
 
@@ -129,9 +135,10 @@ function changeLanguage() {
 }
 
 function updateInterface() {
-    document.getElementById('start-game').textContent = translations[selectedLanguage].startGame;
-    document.getElementById('submitBtn').textContent = translations[selectedLanguage].submit;
-    document.getElementById('scoreBoard').innerHTML = `${translations[selectedLanguage].score}: <span id="score">${score}</span>`;
+  document.getElementById('start-game').textContent = translations[selectedLanguage].startGame;
+  document.getElementById('submitBtn').textContent = translations[selectedLanguage].submit;
+  document.getElementById('scoreBoard').innerHTML = `${translations[selectedLanguage].score}: <span id="score">${score}</span>`;
+  document.getElementById('loading').textContent = translations[selectedLanguage].loading;
 }
 
 function startGame() {
@@ -147,10 +154,10 @@ function startGame() {
     cancelButton.className = 'button';
     cancelButton.textContent = 'X';
     document.getElementById('game-area').appendChild(cancelButton);
-    score = 5; // Reset score when starting a new game
+    score = 5;
     document.getElementById('score').textContent = score;
     questionCache = [];
-    questionCount = 0; // Reset question count when starting a new game
+    questionCount = 0;
     currentQuestionIndex = 0;
 
     // Show loading animation
@@ -175,7 +182,6 @@ async function fetchQuestions() {
     if (selectedType !== 'any') {
         apiUrl += `&type=${selectedType}`;
     }
-
     try {
         const response = await fetch(apiUrl);
         const data = await response.json();
@@ -224,7 +230,7 @@ function submitAnswer() {
     const messageElement = document.getElementById('message');
     if (selectedAnswer) {
         const userAnswer = selectedAnswer.value;
-        questionCount++; // Increment question count
+        questionCount++;
         if (userAnswer === correctAnswer) {
             score++;
             messageElement.textContent = translations[selectedLanguage].correct;
@@ -262,7 +268,7 @@ function translateText(text, targetLanguage) {
         .then(data => data[0][0][0])
         .catch(error => {
             console.error('Error translating text:', error);
-            return text; // Fallback to the original text if translation fails
+            return text;
         });
 }
 
@@ -316,3 +322,109 @@ function resetGame() {
     isFetching = false;
     updateInterface();
 }
+
+particlesJS('particles-js', {
+    "particles": {
+        "number": {
+            "value": 80,
+            "density": {
+                "enable": true,
+                "value_area": 800
+            }
+        },
+        "color": {
+            "value": ["#ff0000", "#00ff00", "#0000ff", "#ffff00", "#ff00ff", "#00ffff"]
+        },
+        "shape": {
+            "type": "circle",
+            "stroke": {
+                "width": 0,
+                "color": "#000000"
+            },
+            "polygon": {
+                "nb_sides": 5
+            }
+        },
+        "opacity": {
+            "value": 0.8,
+            "random": true,
+            "anim": {
+                "enable": false,
+                "speed": 1,
+                "opacity_min": 0.1,
+                "sync": false
+            }
+        },
+        "size": {
+            "value": 5,
+            "random": true,
+            "anim": {
+                "enable": false,
+                "speed": 40,
+                "size_min": 0.1,
+                "sync": false
+            }
+        },
+        "line_linked": {
+            "enable": true,
+            "distance": 150,
+            "color": "#bebebe",
+            "opacity": 0.4,
+            "width": 1
+        },
+        "move": {
+            "enable": true,
+            "speed": 6,
+            "direction": "none",
+            "random": false,
+            "straight": false,
+            "out_mode": "out",
+            "bounce": false,
+            "attract": {
+                "enable": false,
+                "rotateX": 600,
+                "rotateY": 1200
+            }
+        }
+    },
+    "interactivity": {
+        "detect_on": "canvas",
+        "events": {
+            "onhover": {
+                "enable": false,
+                "mode": "repulse"
+            },
+            "onclick": {
+                "enable": true,
+                "mode": "push"
+            },
+            "resize": true
+        },
+        "modes": {
+            "grab": {
+                "distance": 400,
+                "line_linked": {
+                    "opacity": 1
+                }
+            },
+            "bubble": {
+                "distance": 400,
+                "size": 40,
+                "duration": 2,
+                "opacity": 8,
+                "speed": 3
+            },
+            "repulse": {
+                "distance": 200,
+                "duration": 0.4
+            },
+            "push": {
+                "particles_nb": 4
+            },
+            "remove": {
+                "particles_nb": 2
+            }
+        }
+    },
+    "retina_detect": true
+});
