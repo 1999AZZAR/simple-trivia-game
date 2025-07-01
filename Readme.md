@@ -1,13 +1,17 @@
-# Simple Trivia Game
+# Trivia Challenge
 
-Welcome to the **Simple Trivia Game**! This is a basic web-based trivia game designed to challenge your knowledge across various topics. It's a fun and engaging way to test your trivia skills!
+Welcome to **Trivia Challenge**! This isn't just another trivia game; it's a sleek, modern, and professional web-based experience designed to test your knowledge with style. Featuring a glassmorphism-inspired UI and dynamic content, it's a fun and engaging way to challenge your trivia skills.
 
 ## Features
 
-- **Multiple Choice Questions:** Answer questions by selecting from a set of options.
-- **Score Tracking:** Your score is updated in real-time as you answer questions.
-- **Dynamic Feedback:** Instant feedback on whether your answer was correct or incorrect.
-- **Responsive Design:** Enjoy the game on any device, from desktop to mobile.
+- **Stunning Modern UI:** A beautiful glassmorphism and Material You-inspired design that's easy on the eyes.
+- **Multi-Language Support:** Play in English, Indonesian, Spanish, French, German, or Japanese.
+- **Vast Category Selection:** Choose from over 20 categories, from General Knowledge to Japanese Anime & Manga.
+- **Customizable Difficulty:** Tailor the challenge by selecting easy, medium, or hard questions.
+- **Multiple Question Types:** Test your knowledge with either multiple-choice or true/false questions.
+- **On-the-Fly Translations:** Questions are translated just-in-time for a smooth and fast gameplay experience.
+- **Dynamic Feedback:** Instant, color-coded feedback on whether your answer was correct or incorrect.
+- **Fully Responsive:** Enjoy a seamless experience on any device, from desktop to mobile.
 
 ## Demo
 
@@ -27,15 +31,16 @@ Check out the live demo [here](https://1999azzar.github.io/simple-trivia-game/).
 
 ## Usage
 
-- Open the game in a web browser.
-- Start the trivia by answering the questions displayed.
-- Your score will be shown as you progress through the game.
+- Open the game in your web browser.
+- Customize your game by selecting a language, category, difficulty, and question type.
+- Click "Start Game" and enjoy the challenge!
+- Your score will be tracked as you progress.
 
 ## Project Structure
 
 - **`index.html`:** The main HTML file containing the structure of the game.
-- **`styles.css`:** CSS file for styling the game interface.
-- **`scripts.js`:** JavaScript file that handles the game logic and interaction.
+- **`styles.css`:** CSS file for the modern, glassmorphism-inspired styling.
+- **`scripts.js`:** JavaScript file that handles the game logic, API calls, and dynamic interactions.
 
 ## Contributing
 

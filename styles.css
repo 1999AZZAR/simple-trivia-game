@@ -1,67 +1,29 @@
-@import url('https://fonts.googleapis.com/css2?family=Medrano&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Kalnia:wght@400;700&display=swap');
 
 :root {
-    --background: 0 0% 100%;
-    --foreground: 240 10% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
-    --primary: 240 5.9% 10%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 240 4.8% 95.9%;
-    --secondary-foreground: 240 5.9% 10%;
-    --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 3.8% 46.1%;
-    --accent: 240 4.8% 95.9%;
-    --accent-foreground: 240 5.9% 10%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 240 5.9% 90%;
-    --input: 240 5.9% 90%;
-    --ring: 240 5.9% 10%;
-    --radius: 0.5rem;
+    --bg-gradient-start: #3E5151;
+    --bg-gradient-end: #1E2B2B;
+    --glass-bg: rgba(255, 255, 255, 0.07);
+    --glass-border: rgba(255, 255, 255, 0.15);
+    --primary-accent: #88a0a8;
+    --primary-accent-darker: #607D8B;
+    --text-primary: #ECEFF1;
+    --text-secondary: #B0BEC5;
+    --success-color: #81C784;
+    --error-color: #E57373;
+    --border-radius: 16px;
+    --font-family-body: 'Inter', sans-serif;
+    --font-family-title: 'Kalnia', serif;
 }
 
 body, html {
-    overflow: hidden;
-    background: linear-gradient(to right, purple, blue);
-}
-
-.form-label {
-    font-size: 1rem;
-    color: white;
-    margin-bottom: 0.5rem;
-    text-align: left;
-    width: 100%;
-    max-width: 24rem;
-}
-
-.winning-effect {
-    animation: winning-animation 3s ease-in-out;
-}
-
-@keyframes winning-animation {
-    0%, 100% {
-        transform: scale(1);
-        color: gold;
-    }
-    50% {
-        transform: scale(1.2);
-        color: yellow;
-    }
-}
-
-* {
-    box-sizing: border-box;
-}
-
-body {
     margin: 0;
     padding: 0;
-    font-family: 'Medrano', sans-serif;
-    font-size: 16px;
-    line-height: 1.5;
+    background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+    background-attachment: fixed;
+    font-family: var(--font-family-body);
+    color: var(--text-primary);
+    overflow-x: hidden;
 }
 
 .container {
@@ -70,221 +32,327 @@ body {
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-/*     background: linear-gradient(to right, purple, blue); */
     padding: 1rem;
-    z-index: 1;
+    gap: 2rem;
+}
+
+.title-container {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: var(--border-radius);
+    padding: 1rem 2rem;
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    margin-bottom: 2rem;
 }
 
 .title {
-    font-size: 2rem;
-    font-weight: 800;
-    color: white;
-    margin-bottom: 1.5rem;
-    animation: bounce 2s infinite;
-    text-align: center;
+    font-family: var(--font-family-title);
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    animation: fadeInDown 0.8s ease-out;
+    margin: 0;
 }
 
-@keyframes bounce {
-    0%, 100% {
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
         transform: translateY(0);
     }
-    50% {
-        transform: translateY(-15px);
-    }
 }
 
-.game-setup, .game-area {
-    flex-direction: column;
-    align-items: center;
+.card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: var(--border-radius);
+    padding: 2rem;
     width: 100%;
-    max-width: 45%;
-    z-index: 1;
+    max-width: 550px;
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.game-area {
+    display: none;
+}
+
+.form-label {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+    margin-bottom: -0.5rem; /* Reduce space between label and control */
 }
 
 .form-control {
     width: 100%;
-    padding: 0.75rem;
-    margin-bottom: 1rem;
-    border: 1px solid white;
-    border-radius: var(--radius);
-    background: transparent;
-    color: white;
+    padding: 1rem;
+    border: 1px solid var(--glass-border);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
     font-size: 1rem;
-    font-family: 'Medrano', sans-serif;
+    font-family: var(--font-family-body);
+    -webkit-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23B0BEC5' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1em;
+    transition: all 0.2s ease-in-out;
+}
+
+.form-control:hover {
+    border-color: var(--primary-accent);
+}
+
+.form-control:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--primary-accent-darker);
+    border-color: var(--primary-accent-darker);
 }
 
 .form-control option {
-    background-color: purple;
-    color: white;
+    background-color: var(--bg-gradient-end);
+    color: var(--text-primary);
 }
 
-.category, .question, .answers {
-    font-size: 1.125rem;
-    color: white;
-    margin-bottom: 1rem;
+.button {
+    background: linear-gradient(45deg, var(--primary-accent), var(--primary-accent-darker));
+    color: var(--bg-gradient-end);
+    padding: 1rem;
+    border-radius: 10px;
+    width: 100%;
+    transition: all 0.3s ease;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.button:hover, .button:focus {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(96, 125, 139, 0.3);
+}
+
+#question {
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 1.6;
     text-align: center;
-    max-width: 100%;
+    color: var(--text-primary);
 }
 
 .answers {
     display: flex;
     flex-direction: column;
-    align-items: stretch;
-    text-align: left;
     width: 100%;
+    gap: 1rem;
 }
 
 .answers label {
-    display: block;
-    margin-bottom: 0.5rem;
-    padding: 0.5rem;
-    background-color: rgba(255, 255, 255, 0.1);
-    border-radius: var(--radius);
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: all 0.2s ease-in-out;
+    color: var(--text-secondary);
+    border: 1px solid var(--glass-border);
 }
 
 .answers label:hover {
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: var(--primary-accent);
+    color: var(--text-primary);
 }
 
 .answers input[type="radio"] {
-    margin-right: 0.5rem;
+    display: none;
 }
 
-.button {
-    background-color: yellow;
-    color: black;
-    padding: 0.75rem;
-    border-radius: var(--radius);
-    width: 100%;
-    transition: transform 0.2s, background-color 0.3s;
-    font-size: 1rem;
-    cursor: pointer;
-    border: none;
-    margin-top: 1rem;
-    font-family: 'Medrano', sans-serif;
+.answers input[type="radio"]:checked + span {
+    background-color: var(--primary-accent);
+    border-color: var(--primary-accent-darker);
+    transform: scale(1.1);
 }
 
-#cancelBtn {
-    position: absolute;
-    top: 5%;
-    right: 5%;
-    background-color: transparent;
-    color: white;
-    font-size: 1.5rem;
-    border: none;
-    cursor: pointer;
-    width: fit-content;
-    transition: transform 0.2s, color 0.3s;
+.answers input[type="radio"]:checked + span::after {
+    opacity: 1;
 }
 
-#submitBtn {
-    width: -webkit-fill-available;
-}
-#cancelBtn:hover {
-    color: lightyellow;
-    transform: scale(1.2);
+.answers input[type="radio"]:checked ~ .answer-text {
+    color: var(--text-primary);
+    font-weight: 500;
 }
 
-.button:hover {
-    background-color: lightyellow;
-    transform: scale(1.05);
-}
-
-.score-board, .message {
-    font-size: 1.125rem;
-    color: white;
-    margin-top: 1rem;
-    text-align: center;
-}
-
-.loading {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: white;
-    text-align: center;
-    padding: 20px;
-    position: relative;
-}
-
-.loading::before {
-    content: '';
-    display: block;
-    width: 40px;
-    height: 40px;
-    border: 6px solid yellow;
-    border-top-color: transparent;
+.custom-radio {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--glass-border);
     border-radius: 50%;
-    margin: 0 auto 10px;
-    animation: spin 1s linear infinite;
+    margin-right: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease-in-out;
+    flex-shrink: 0;
+}
+
+.custom-radio::after {
+    content: '';
+    width: 10px;
+    height: 10px;
+    background-color: var(--text-primary);
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.answer-text {
+    flex-grow: 1;
+}
+
+#scoreBoard {
+    font-weight: 500;
+}
+
+#message {
+    font-size: 1rem;
+    font-weight: 500;
+    text-align: center;
+    padding: 0.75rem;
+    border-radius: 10px;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+#message.correct {
+    background-color: rgba(0, 230, 118, 0.2);
+    color: var(--success-color);
+    border: 1px solid var(--success-color);
+    visibility: visible;
+    opacity: 1;
+}
+
+#message.wrong {
+    background-color: rgba(255, 82, 82, 0.2);
+    color: var(--error-color);
+    border: 1px solid var(--error-color);
+    visibility: visible;
+    opacity: 1;
+}
+
+#game-content {
+    display: contents;
+}
+
+.loading-container {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+.loader {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.loader span {
+    width: 12px;
+    height: 12px;
+    background-color: var(--primary-accent);
+    border-radius: 50%;
+    animation: pulse 1.4s infinite ease-in-out both;
+}
+
+.loader span:nth-child(1) {
+    animation-delay: -0.32s;
+}
+
+.loader span:nth-child(2) {
+    animation-delay: -0.16s;
+}
+
+@keyframes pulse {
+    0%, 80%, 100% {
+        transform: scale(0);
+    } 40% {
+        transform: scale(1.0);
+    }
 }
 
 @keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
+    to {
         transform: rotate(360deg);
     }
 }
 
 .footer {
-    margin-top: 3.5rem;
-    color: #333;
-    text-align: center;
-    font-size: 1.2rem;
+    padding: 1rem;
 }
 
 .footer a {
-    color: #ededed;
+    color: var(--text-secondary);
     text-decoration: none;
     transition: color 0.3s;
 }
 
 .footer a:hover {
-    color: #ffffff;
-    transform: scale(1.05);
+    color: var(--primary-accent);
 }
 
-#particles-js {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-}
-
-/* Mobile-friendly adjustments */
 @media (max-width: 768px) {
-    body {
-        font-size: 16px;
-        padding: 0.5rem;
-    }
-
-    .container {
-        padding: 1rem;
-    }
-
     .title {
-        font-size: 1.75rem;
-        margin-bottom: 1rem;
+        font-size: 2rem;
     }
 
-    .game-setup, .game-area {
-        max-width: 98%;
-        padding: 0 1rem;
-    }
-
-    .form-control, .button {
-        font-size: 1.125rem;
-        padding: 0.75rem;
-        width: 100%;
-    }
-
-    .category, .question, .answers {
-        font-size: 1.125rem;
-    }
-
-    .answers label {
-        padding: 1rem 0.75rem;
+    .card {
+        padding: 1.5rem;
     }
 }
+
+#cancelBtn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+    border: 1px solid var(--glass-border);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#cancelBtn:hover {
+    background: var(--error-color);
+    color: #000;
+    transform: rotate(90deg);
+}
+
+#particles-js { display: none; }
+.game-setup { flex-direction: column; }
+#submitBtn { width: 100%; }
+.score-board { text-align: center; }
+.message { text-align: center; }

@@ -141,165 +141,193 @@ function updateInterface() {
   document.getElementById('loading').textContent = translations[selectedLanguage].loading;
 }
 
-function startGame() {
+async function startGame() {
     selectedLanguage = document.getElementById('trivia-language').value;
     selectedDifficulty = document.getElementById('trivia-difficulty').value;
     selectedCategory = document.getElementById('trivia-category').value;
     selectedType = document.getElementById('trivia-type').value;
+    
     document.getElementById('game-setup').style.display = 'none';
     document.getElementById('footer').style.display = 'none';
-    document.getElementById('game-area').style.display = 'block';
+    document.getElementById('game-area').style.display = 'flex';
+    
     const cancelButton = document.createElement('button');
     cancelButton.id = 'cancelBtn';
-    cancelButton.className = 'button';
     cancelButton.textContent = 'X';
     document.getElementById('game-area').appendChild(cancelButton);
+    
     score = 5;
     document.getElementById('score').textContent = score;
     questionCache = [];
     questionCount = 0;
     currentQuestionIndex = 0;
 
-    // Show loading animation
-    document.getElementById('loading').style.display = 'block';
-    document.getElementById('category').style.display = 'none';
-    document.getElementById('question').style.display = 'none';
-    document.getElementById('answers').style.display = 'none';
-    document.getElementById('submitBtn').style.display = 'none';
+    showLoading(true);
 
-    fetchQuestions();
+    await fetchQuestions();
+    await displayNextQuestion();
 }
 
 async function fetchQuestions() {
+    if (isFetching) return;
     isFetching = true;
+    
     let apiUrl = `https://opentdb.com/api.php?amount=25`;
-    if (selectedCategory !== 'any') {
-        apiUrl += `&category=${selectedCategory}`;
-    }
-    if (selectedDifficulty !== 'any') {
-        apiUrl += `&difficulty=${selectedDifficulty}`;
-    }
-    if (selectedType !== 'any') {
-        apiUrl += `&type=${selectedType}`;
-    }
+    if (selectedCategory !== 'any') apiUrl += `&category=${selectedCategory}`;
+    if (selectedDifficulty !== 'any') apiUrl += `&difficulty=${selectedDifficulty}`;
+    if (selectedType !== 'any') apiUrl += `&type=${selectedType}`;
+
     try {
         const response = await fetch(apiUrl);
         const data = await response.json();
-        questionCache = [];
-
-        for (const question of data.results) {
-            const translatedQuestion = await translateText(question.question, selectedLanguage);
-            const translatedCorrectAnswer = await translateText(question.correct_answer, selectedLanguage);
-            const translatedIncorrectAnswers = await Promise.all(
-                question.incorrect_answers.map(answer => translateText(answer, selectedLanguage))
-            );
-
-            questionCache.push({
-                ...question,
-                question: translatedQuestion,
-                correct_answer: translatedCorrectAnswer,
-                incorrect_answers: translatedIncorrectAnswers
-            });
-        }
-
-        isFetching = false;
-
-        // Hide loading animation and display question
-        document.getElementById('loading').style.display = 'none';
-        document.getElementById('category').style.display = 'block';
-        document.getElementById('question').style.display = 'block';
-        document.getElementById('answers').style.display = 'block';
-        document.getElementById('submitBtn').style.display = 'block';
-
-        if (questionCache.length > 0) {
-            displayNextQuestion();
-        }
+        questionCache = data.results;
+        currentQuestionIndex = 0;
     } catch (error) {
         console.error('Error fetching questions:', error);
         document.getElementById('message').textContent = translations[selectedLanguage].errorFetching;
+        document.getElementById('message').classList.add('wrong');
+    } finally {
         isFetching = false;
-
-        // Hide loading animation if there's an error
-        document.getElementById('loading').style.display = 'none';
     }
 }
 
+function showLoading(show) {
+    const loadingContainer = document.getElementById('loading');
+    const gameContent = document.getElementById('game-content');
+
+    if (loadingContainer) {
+        loadingContainer.style.display = show ? 'flex' : 'none';
+    }
+    if (gameContent) {
+        gameContent.style.display = show ? 'none' : 'contents';
+    }
+}
 
 function submitAnswer() {
     const selectedAnswer = document.querySelector('input[name="answer"]:checked');
     const messageElement = document.getElementById('message');
+    
+    messageElement.classList.remove('correct', 'wrong');
+
     if (selectedAnswer) {
         const userAnswer = selectedAnswer.value;
         questionCount++;
         if (userAnswer === correctAnswer) {
             score++;
             messageElement.textContent = translations[selectedLanguage].correct;
+            messageElement.classList.add('correct');
         } else {
             score--;
             messageElement.textContent = translations[selectedLanguage].wrong.replace('{answer}', correctAnswer);
+            messageElement.classList.add('wrong');
         }
         document.getElementById('score').textContent = score;
 
         if (score >= winningScore) {
             messageElement.textContent = translations[selectedLanguage].congrats.replace('{count}', questionCount);
-            document.getElementById('message').classList.add('winning-effect');
-            setTimeout(() => {
-                document.getElementById('message').classList.remove('winning-effect');
-                resetGame();
-            }, 3000);
+            messageElement.classList.add('correct');
+            setTimeout(resetGame, 3000);
         } else if (score <= 0) {
-            gameOver();
+            messageElement.textContent = translations[selectedLanguage].gameOver.replace('{count}', questionCount);
+            messageElement.classList.add('wrong');
+            setTimeout(resetGame, 3000);
         } else {
             setTimeout(() => {
                 displayNextQuestion();
-                messageElement.textContent = '';
-            }, 1000);
+                messageElement.classList.remove('correct', 'wrong');
+            }, 1500);
         }
     } else {
         messageElement.textContent = translations[selectedLanguage].selectAnswer;
+        messageElement.classList.add('wrong');
     }
 }
 
-function translateText(text, targetLanguage) {
+async function translateText(text, targetLanguage) {
+    if (targetLanguage === 'en') {
+        return text;
+    }
     const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=${targetLanguage}&dt=t&q=${encodeURIComponent(text)}`;
 
-    return fetch(url)
-        .then(response => response.json())
-        .then(data => data[0][0][0])
-        .catch(error => {
-            console.error('Error translating text:', error);
-            return text;
-        });
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+        return data[0][0][0];
+    } catch (error) {
+        console.error('Error translating text:', error);
+        return text;
+    }
 }
 
+async function translateSingleQuestion(questionData) {
+    if (questionData.isTranslated) return questionData;
 
-function displayNextQuestion() {
+    // Only translate the question, not the answers, to preserve game logic.
+    questionData.question = await translateText(questionData.question, selectedLanguage);
+    questionData.isTranslated = true;
+
+    return questionData;
+}
+
+async function displayNextQuestion() {
     if (currentQuestionIndex >= questionCache.length) {
-        currentQuestionIndex = 0;
+        showLoading(true);
+        await fetchQuestions();
     }
+    
+    let questionData = questionCache[currentQuestionIndex];
 
-    const questionData = questionCache[currentQuestionIndex];
+    if (!questionData.isTranslated) {
+        showLoading(true);
+        questionData = await translateSingleQuestion(questionData);
+        showLoading(false);
+    }
+    
+    // Proactively translate the next question in the background
+    if (currentQuestionIndex + 1 < questionCache.length) {
+        const nextQuestionData = questionCache[currentQuestionIndex + 1];
+        if (!nextQuestionData.isTranslated) {
+            translateSingleQuestion(nextQuestionData);
+        }
+    }
+    
     correctAnswer = questionData.correct_answer;
-    const answers = [...questionData.incorrect_answers, correctAnswer];
+    let answers = [...questionData.incorrect_answers, correctAnswer];
     answers.sort(() => Math.random() - 0.5);
 
-    document.getElementById('category').innerHTML = `${translations[selectedLanguage].category}: ${questionData.category}`;
+    document.getElementById('category').textContent = questionData.category;
     document.getElementById('question').innerHTML = questionData.question;
+    const answersContainer = document.getElementById('answers');
+    answersContainer.innerHTML = '';
 
-    const answersDiv = document.getElementById('answers');
-    answersDiv.innerHTML = '';
-    answers.forEach(answer => {
-        const answerElement = document.createElement('div');
-        answerElement.innerHTML = `
-            <label>
-                <input type="radio" name="answer" value="${answer}">
-                ${answer}
-            </label>
-        `;
-        answersDiv.appendChild(answerElement);
+    answers.forEach((answer, index) => {
+        const answerId = `answer${index}`;
+        const answerLabel = document.createElement('label');
+        answerLabel.htmlFor = answerId;
+
+        const answerInput = document.createElement('input');
+        answerInput.type = 'radio';
+        answerInput.name = 'answer';
+        answerInput.id = answerId;
+        answerInput.value = answer;
+        
+        const customRadio = document.createElement('span');
+        customRadio.className = 'custom-radio';
+
+        const answerText = document.createElement('span');
+        answerText.className = 'answer-text';
+        answerText.textContent = answer;
+
+        answerLabel.appendChild(answerInput);
+        answerLabel.appendChild(customRadio);
+        answerLabel.appendChild(answerText);
+        answersContainer.appendChild(answerLabel);
     });
 
     currentQuestionIndex++;
+    document.getElementById('message').textContent = '';
+    
+    document.getElementById('game-area').style.display = 'flex';
 }
 
 function gameOver() {
@@ -312,11 +340,20 @@ function gameOver() {
 }
 
 function resetGame() {
-    document.getElementById('message').textContent = '';
+    const messageElement = document.getElementById('message');
+    messageElement.textContent = '';
+    messageElement.classList.remove('correct', 'wrong');
+
     document.getElementById('submitBtn').disabled = false;
     document.getElementById('game-area').style.display = 'none';
-    document.getElementById('game-setup').style.display = 'block';
+    document.getElementById('game-setup').style.display = 'flex';
     document.getElementById('footer').style.display = 'block';
+
+    const cancelBtn = document.getElementById('cancelBtn');
+    if (cancelBtn) {
+        cancelBtn.remove();
+    }
+
     questionCache = [];
     currentQuestionIndex = 0;
     isFetching = false;

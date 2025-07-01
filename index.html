@@ -10,9 +10,9 @@
 <body>
     <div id="particles-js"></div>
     <div class="container">
-        <h1 id="trivia-game" class="title">🌟 Trivia Game! 🌟</h1>
+        <h1 id="trivia-game" class="title">Trivia Challenge</h1>
 
-        <div id="game-setup" class="game-setup">
+        <div id="game-setup" class="card">
             <label for="trivia-language" class="form-label" id="label-language"></label>
             <select id="trivia-language" class="form-control">
                 <option value="en">English</option>
@@ -70,14 +70,22 @@
             <button id="start-game" class="button">Start Game</button>
         </div>
 
-        <div id="game-area" class="game-area" style="display: none;">
-            <div id="loading" class="loading" style="display: none;"></div>
-            <div id="category" class="category"></div>
-            <div id="question" class="question"></div>
-            <div id="answers" class="answers"></div>
-            <button id="submitBtn" class="button">Submit 🚀</button>
-            <div id="scoreBoard" class="score-board">Score: <span id="score">5</span></div>
-            <div id="message" class="message"></div>
+        <div id="game-area" class="card" style="display: none;">
+            <div id="loading" class="loading-container">
+                <div class="loader">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+            <div id="game-content" style="display: none;">
+                <div id="category" class="category"></div>
+                <div id="question" class="question"></div>
+                <div id="answers" class="answers"></div>
+                <button id="submitBtn" class="button">Submit 🚀</button>
+                <div id="scoreBoard" class="score-board">Score: <span id="score">5</span></div>
+                <div id="message" class="message"></div>
+            </div>
         </div>
 
         <div id ="footer" class="footer">
